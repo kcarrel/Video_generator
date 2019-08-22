@@ -1,5 +1,7 @@
 import React, { Component} from 'react';
 import Search from './components/Search'
+import ReactPlayer from 'react-player'
+
 import './App.css';
 
 class App extends Component {
@@ -18,12 +20,14 @@ class App extends Component {
 
   handleSubmit = (ev) => {
     ev.preventDefault()  
+    this.searchByKeyword()
   }
 
-  // searchByKeyword() {
-  //   let results = Youtube.Search.list('id, sinppet', {q: ${this.state.search}, maxResults: 1});
-
-  // }
+  searchByKeyword() {
+    // fetch to the backend 
+    // call the youtube data api for the query
+    // use result to generate the iframe
+  }
   render () {
     return (
       <Search 
