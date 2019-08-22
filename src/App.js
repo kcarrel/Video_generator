@@ -8,6 +8,16 @@ class App extends Component {
     this.state = {
       search: ''
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleChange = (ev) => {
+    this.setState({ [ev.target.name]: ev.target.value })
+  }
+
+  handleSubmit = (ev) => {
+    ev.preventDefault()  
   }
 
   // searchByKeyword() {
@@ -16,7 +26,11 @@ class App extends Component {
   // }
   render () {
     return (
-      <Search></Search>
+      <Search 
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+        search={this.state.search}
+        ></Search>
     );
   }
 }
