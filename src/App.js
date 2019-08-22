@@ -7,6 +7,11 @@ class App extends Component {
     this.state = {
     }
   }
+
+  searchByKeyword() {
+    let results = Youtube.Search.list('id, sinppet', {q: ${this.state.search}, maxResults: 1});
+
+  }
   render () {
     return (
       <div>Hi</div>
