@@ -43,7 +43,12 @@ class Login extends Component {
             })
         })
             .then(r => r.json())
-            .then(json => console.log(json))
+            .then(json => {
+                localStorage.setItem('UserID', json.user.id);
+                localStorage.setItem('Token', json.jwt);
+                localStorage.setItem('UserName', json.user.name);
+                console.log(json)
+            })
     }
 
     render() {
