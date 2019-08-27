@@ -29,7 +29,7 @@ class Login extends Component {
     handleSubmit = (ev) => {
         ev.preventDefault()
         //post to user database
-        fetch('https://dateplanet.herokuapp.com/profile', {
+        fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,18 +43,7 @@ class Login extends Component {
             })
         })
             .then(r => r.json())
-            .then(json => {
-                if (json.user) {
-                    localStorage.setItem('ticketmaster', json.ticketmaster);
-                    localStorage.setItem('yelp', json.yelp);
-                    localStorage.setItem('UserID', json.user.id);
-                    localStorage.setItem('UserEmail', json.user.email);
-                    localStorage.setItem('Token', json.token);
-                    this.getProfile()
-                } else {
-                    alert("User information not found. Please try again.")
-                }
-            })
+            .then(json => console.log(json))
     }
 
     render() {
