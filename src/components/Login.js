@@ -37,7 +37,7 @@ class Login extends Component {
             },
             body: JSON.stringify({
                 user: {
-                    email: this.state.email,
+                    name: this.state.email,
                     password: this.state.password,
                 }
             })
