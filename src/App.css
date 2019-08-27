@@ -19,22 +19,7 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .form {
-  width: 100vh;
-  height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -43,6 +28,7 @@
 .main {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   overflow: hidden;
   margin: auto;

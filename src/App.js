@@ -1,5 +1,8 @@
 import React, { Component} from 'react';
 import Search from './components/Search'
+import Login from './components/Login'
+// import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import ReactPlayer from 'react-player'
 
 import './App.css';
@@ -30,11 +33,12 @@ class App extends Component {
   }
   render () {
     return (
-      <Search 
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        search={this.state.search}
-        ></Search>
+      <Login></Login>
+      // <Search 
+      //   handleChange={this.handleChange}
+      //   handleSubmit={this.handleSubmit}
+      //   search={this.state.search}
+      //   ></Search>
     );
   }
 }
