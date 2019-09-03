@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
 import Search from './components/Search'
 import Login from './components/Login'
+import Collection from './components/Collection'
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -17,7 +19,9 @@ class App extends Component {
       email: '',
       password: '',
       hasTyped: false,
-      loggedIn: false
+      loggedIn: false,
+      token: '',
+      collection: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -51,10 +55,31 @@ class App extends Component {
           localStorage.setItem('UserID', json.user.id);
           localStorage.setItem('Token', json.jwt);
           localStorage.setItem('UserName', json.user.name);
-          this.setState({ loggedIn: true })
+          this.setState({ 
+            loggedIn: true,
+            token: json.jwt
+          })
+        
         } else {
           console.log('This is a goof. Put a failure notification here.')
         }
+      })
+      .then(() => {
+        this.fetchCollection()
+      })
+  }
+
+  fetchCollection() {
+    //gotta send the token over
+    fetch((`http://localhost:3000/collections/${localStorage.getItem('UserID')}`), {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${this.state.token}`
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+        this.setState({ collection: json.items[0].collection_id });
       })
   }
 
@@ -85,6 +110,7 @@ class App extends Component {
       //   handleSubmit={this.handleSubmit}
       //   search={this.state.search}
       //   ></Search>
+      
     );
   }
 }
