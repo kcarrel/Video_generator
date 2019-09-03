@@ -13,43 +13,8 @@ import Typography from '@material-ui/core/Typography';
 class Login extends Component {
     constructor(props) {
         super(props)
-
-        this.state = {
-            email: '',
-            password: '',
-            hasTyped: false
-        }
     }
 
-    handleChange = (ev) => {
-        this.setState({ [ev.target.name]: ev.target.value })
-        this.setState({ hasTyped: true })
-    }
-
-    handleSubmit = (ev) => {
-        ev.preventDefault()
-        //post to user database
-        fetch('http://localhost:3000/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            },
-            body: JSON.stringify({
-                user: {
-                    name: this.state.email,
-                    password: this.state.password,
-                }
-            })
-        })
-            .then(r => r.json())
-            .then(json => {
-                localStorage.setItem('UserID', json.user.id);
-                localStorage.setItem('Token', json.jwt);
-                localStorage.setItem('UserName', json.user.name);
-                console.log(json)
-            })
-    }
 
     render() {
         return (
@@ -65,14 +30,14 @@ class Login extends Component {
                     <form className="form">
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel >Email Address</InputLabel>
-                            <Input id="email" name="email" onChange={this.handleChange} value={this.state.email} autoComplete="email" autoFocus />
+                            <Input id="email" name="email" onChange={(ev) => this.props.handleChangeLogin(ev)} value={this.props.email} autoComplete="email" autoFocus />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel >Password</InputLabel>
-                            <Input name="password" type="password" id="password" onChange={this.handleChange} value={this.state.password} autoComplete="current-password" />
+                            <Input name="password" type="password" id="password" onChange={(ev) => this.props.handleChangeLogin(ev)} value={this.props.password} autoComplete="current-password" />
                         </FormControl>
                             <Button
-                                onClick={this.handleSubmit}
+                                onClick={(ev) => this.props.handleLogin(ev)}
                                 type="submit"
                                 fullWidth
                                 variant="contained"

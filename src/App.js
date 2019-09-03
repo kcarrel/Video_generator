@@ -11,10 +11,44 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      search: ''
+      search: '', 
+      email: '',
+      password: '',
+      hasTyped: false,
+      loggedIn: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
+  }
+
+  handleChangeLogin = (ev) => {
+    this.setState({ [ev.target.name]: ev.target.value })
+    this.setState({ hasTyped: true })
+  }
+
+  handleLogin = (ev) => {
+    ev.preventDefault()
+    //post to user database
+    fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        user: {
+          name: this.state.email,
+          password: this.state.password,
+        }
+      })
+    })
+      .then(r => r.json())
+      .then(json => {
+        localStorage.setItem('UserID', json.user.id);
+        localStorage.setItem('Token', json.jwt);
+        localStorage.setItem('UserName', json.user.name);
+      })
   }
 
   handleChange = (ev) => {
@@ -33,7 +67,12 @@ class App extends Component {
   }
   render () {
     return (
-      <Login></Login>
+      <Login
+      email={this.state.email}
+      password={this.state.password}
+      handleChangeLogin={this.handleChangeLogin}
+      handleLogin={this.handleLogin}
+      />
       // <Search 
       //   handleChange={this.handleChange}
       //   handleSubmit={this.handleSubmit}
