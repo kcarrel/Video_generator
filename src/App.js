@@ -1,8 +1,9 @@
 import React, { Component} from 'react';
 import Search from './components/Search'
 import Login from './components/Login'
+import Home from './components/Home'
 import Collection from './components/Collection'
-
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -99,12 +100,16 @@ class App extends Component {
   }
   render () {
     return (
-      <Login
-      email={this.state.email}
-      password={this.state.password}
-      handleChangeLogin={this.handleChangeLogin}
-      handleLogin={this.handleLogin}
-      />
+      <Router>
+        <Route exact path='/' render={(props) => <Home {...props} />}
+        />
+        <Route exact path='/login' render={(props) => <Login {...props} email={this.state.email}
+          password={this.state.password}
+          handleChangeLogin={this.handleChangeLogin}
+          handleLogin={this.handleLogin} />}      
+        />
+      </Router>
+
       // <Search 
       //   handleChange={this.handleChange}
       //   handleSubmit={this.handleSubmit}
