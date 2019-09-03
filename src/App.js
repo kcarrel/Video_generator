@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
 import Search from './components/Search'
 import Login from './components/Login'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import ReactPlayer from 'react-player'
@@ -45,9 +47,14 @@ class App extends Component {
     })
       .then(r => r.json())
       .then(json => {
-        localStorage.setItem('UserID', json.user.id);
-        localStorage.setItem('Token', json.jwt);
-        localStorage.setItem('UserName', json.user.name);
+        if (json.user) {
+          localStorage.setItem('UserID', json.user.id);
+          localStorage.setItem('Token', json.jwt);
+          localStorage.setItem('UserName', json.user.name);
+          this.setState({ loggedIn: true })
+        } else {
+          console.log('This is a goof. Put a failure notification here.')
+        }
       })
   }
 
