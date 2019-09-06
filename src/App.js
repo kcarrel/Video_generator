@@ -1,7 +1,13 @@
 import React, { Component} from 'react';
 import Search from './components/Search'
 import Login from './components/Login'
+import Signup from './components/Signup'
+import BottomNavigationBar from './components/BottomNavigationBar'
+
 import Home from './components/Home'
+import HomeBar from './components/HomeBar'
+import LoggedInBar from './components/LoggedInBar'
+
 import Collection from './components/Collection'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -101,6 +107,11 @@ class App extends Component {
   render () {
     return (
       <Router>
+        {(this.state.loggedIn) ?
+          <LoggedInBar />
+          :
+          <HomeBar />
+        }
         <Route exact path='/' render={(props) => <Home {...props} />}
         />
         <Route exact path='/login' render={(props) => <Login {...props} email={this.state.email}
@@ -108,6 +119,12 @@ class App extends Component {
           handleChangeLogin={this.handleChangeLogin}
           handleLogin={this.handleLogin} />}      
         />
+        <Route exact path='/signup' render={(props) => <Login {...props} email={this.state.email}
+          password={this.state.password}
+          handleChangeLogin={this.handleChangeLogin}
+          handleLogin={this.handleLogin} />}
+        />
+        <BottomNavigationBar/>
       </Router>
 
       // <Search 
