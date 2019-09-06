@@ -5,6 +5,8 @@ import Signup from './components/Signup'
 import BottomNavigationBar from './components/BottomNavigationBar'
 
 import Home from './components/Home'
+import About from './components/About'
+
 import HomeBar from './components/HomeBar'
 import LoggedInBar from './components/LoggedInBar'
 
@@ -119,6 +121,8 @@ class App extends Component {
           handleChangeLogin={this.handleChangeLogin}
           handleLogin={this.handleLogin} />}      
         />
+        <Route exact path='/about' render={(props) => <About {...props} toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />} />
+
         <Route exact path='/signup' render={(props) => <Login {...props} email={this.state.email}
           password={this.state.password}
           handleChangeLogin={this.handleChangeLogin}
